@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kristoff.employees.dao.IEmployeesDao">
+    <select id="findEmployeeList"
+            parameterType="com.kristoff.employees.vo.EmployeeVO"
+            resultType="com.kristoff.employees.vo.EmployeeVO">
+        SELECT
+            emp.emp_no AS empNo,
+            emp.birth_date as birthDate,
+            emp.first_name as firstName,
+            emp.last_name as lastName,
+            emp.gender as gender,
+            emp.hire_date as hireDate
+        FROM
+            employees AS emp
+        WHERE 1=1
+        <if test="empNo != null">
+            AND emp.emp_no = #{empNo}
+        </if>
+        <if test="name != null and name != ''">
+            AND ( locate( emp.first_name, #{name}) > 0 OR LOCATE( emp.last_name,#{name} ) > 0 )
+        </if>
+        <if test="gender != null and gender != ''">
+            AND emp.gender = #{gender}
+        </if>
+    </select>
+
+    <insert id="insertEmployee" parameterType="com.kristoff.employees.vo.EmployeeVO">
+        INSERT INTO `employees`
+        (`emp_no`,
+        `birth_date`,
+        `first_name`,
+        `last_name`,
+        `gender`,
+        `hire_date`)
+        VALUES
+        (#{empNo},
+         #{birthDate},
+         #{firstName},
+         #{lastName},
+         #{gender},
+         #{hireDate})
+    </insert>
+
+    <delete id="deleteEmployee" parameterType="java.lang.String">
+        DELETE from employees where emp_no = #{empNo}
+    </delete>
+
+    <update id="updateEmployee" parameterType="com.kristoff.employees.vo.EmployeeVO">
+        UPDATE employees t
+        SET t.birth_date = #{birthDate},
+        t.hire_date = #{hireDate},
+        t.first_name = #{firstName},
+        t.last_name = #{lastName},
+        t.gender = #{gender}
+        WHERE
+            t.emp_no = #{empNo}
+    </update>
+</mapper>
