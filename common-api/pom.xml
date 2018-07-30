@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>common-api</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -30,4 +30,16 @@
             <version>3.2.2</version>
         </dependency>
     </dependencies>
+    <!--
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build> -->
 </project>
