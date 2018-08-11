@@ -1,8 +1,11 @@
 package com.kristoff.common.vo;
 
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.io.IOUtils;
 
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.io.StringWriter;
 import java.util.List;
 
 public class BasicResponseVO implements Serializable {
@@ -18,6 +21,7 @@ public class BasicResponseVO implements Serializable {
     public static final String MESSAGE_NO_RIGHT = "You have no right.";
 
     private int status;
+    private String messageId;
     private String messageCode;
     private String messageText;
 
@@ -40,6 +44,19 @@ public class BasicResponseVO implements Serializable {
         }
     }
 
+    protected BasicResponseVO(int status, String messageId, String messageCode, String messageText) {
+        this(status, messageCode, messageText);
+        this.messageId = messageId;
+    }
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
+
     public static BasicResponseVO ok() {
         return new BasicResponseVO(STATUS_OK, "", MESSAGE_OK);
     }
@@ -58,6 +75,16 @@ public class BasicResponseVO implements Serializable {
 
     public static BasicResponseVO error(String messgeCode, String messageText) {
         return new BasicResponseVO(STATUS_ERROR, messgeCode, messageText);
+    }
+
+    public static BasicResponseVO error(String messgeCode, Throwable throwable) {
+        String messageText = getStackTrace(throwable);
+        return new BasicResponseVO(STATUS_ERROR, messgeCode, messageText);
+    }
+
+    public static BasicResponseVO error(String messageId, String messgeCode, Throwable throwable) {
+        String messageText = getStackTrace(throwable);
+        return new BasicResponseVO(STATUS_ERROR, messageId, messgeCode, messageText);
     }
 
     public static BasicResponseVO nodata() {
@@ -94,5 +121,15 @@ public class BasicResponseVO implements Serializable {
 
     public void setMessageText(String messageText) {
         this.messageText = messageText;
+    }
+
+    public static String getStackTrace(Throwable throwable) {
+        if(throwable == null) {
+            return null;
+        }
+        StringWriter writer = new StringWriter();
+        PrintWriter pw = new PrintWriter(writer);
+        throwable.printStackTrace(pw);
+        return writer.toString();
     }
 }
