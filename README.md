@@ -5,3 +5,4 @@
 - Mybatis
 - Swagger管理API
 - 集成Mybatis分页插件pagehelper
+- 全局异常处理类
