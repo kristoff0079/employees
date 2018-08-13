@@ -1,9 +1,11 @@
 package com.kristoff.employees;
 
+import com.kristoff.common.filter.LangFilter;
+import com.kristoff.employees.filter.CorsFilter;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+import org.springframework.context.annotation.Bean;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
@@ -14,4 +16,15 @@ public class EmployeesApplication {
     public static void main(String[] args) {
         SpringApplication.run(EmployeesApplication.class, args);
     }
+
+    @Bean
+    public LangFilter langFilter() {
+        return new LangFilter();
+    }
+
+    /*@Bean
+    public CorsFilter corsFilter() {
+        return new CorsFilter();
+    }*/
+
 }

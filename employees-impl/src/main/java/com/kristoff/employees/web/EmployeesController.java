@@ -7,13 +7,16 @@ import com.kristoff.employees.vo.EmployeeVO;
 import io.swagger.annotations.ApiOperation;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequestMapping(path = "/emp")
+//@CrossOrigin
 public class EmployeesController {
 
     private static final Logger LOGGER = Logger.getLogger(EmployeesController.class);
@@ -29,6 +32,10 @@ public class EmployeesController {
     public BasicResponseVO findEmployeeList(EmployeeVO emp,
                                             @RequestParam(name = "pageSize", defaultValue = "20") Integer pageSize,
                                             @RequestParam(name = "currentPage", defaultValue = "1") Integer currentPage) {
+
+        Locale locale = LocaleContextHolder.getLocale();
+
+        LOGGER.info("locale is " + locale);
 
         try {
 
