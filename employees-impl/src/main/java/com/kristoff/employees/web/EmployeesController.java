@@ -6,6 +6,8 @@ import com.kristoff.employees.service.IEmployeesService;
 import com.kristoff.employees.vo.EmployeeVO;
 import io.swagger.annotations.ApiOperation;
 import org.apache.log4j.Logger;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.MediaType;
@@ -24,6 +26,7 @@ public class EmployeesController {
     @Autowired
     private IEmployeesService employeesService;
 
+    @RequiresPermissions("emp:findEmployeeList")
     @ApiOperation(value = "查询员工列表", notes = "查询员工列表")
     @RequestMapping(path = "/findEmployeeList",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE,

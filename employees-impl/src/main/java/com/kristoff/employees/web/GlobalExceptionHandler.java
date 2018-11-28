@@ -2,6 +2,8 @@ package com.kristoff.employees.web;
 
 import com.kristoff.common.vo.BasicResponseVO;
 import org.apache.log4j.Logger;
+import org.apache.shiro.authz.UnauthenticatedException;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -21,6 +23,15 @@ public class GlobalExceptionHandler {
         if(e == null) {
             return BasicResponseVO.error("system error", "未知错误");
         }
+
+        if(e instanceof UnauthenticatedException) {
+            return BasicResponseVO.error("403","未登录");
+        }
+
+        if(e instanceof UnauthorizedException) {
+            return BasicResponseVO.error("403", "没有权限");
+        }
+
         LOGGER.error(uuid, e);
         return BasicResponseVO.error(uuid,"system error", e);
     }

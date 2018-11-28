@@ -18,6 +18,7 @@ service.interceptors.request.use(config => {
     }
     config.headers['X-Token'] = new Date().getTime();
     config.headers['Accept-Language'] = locale;
+    config.headers['Authorization'] = new Date().getTime();
     config.params['t'] = new Date().getTime();
     return config;
 });
