@@ -5,9 +5,11 @@ import com.kristoff.common.vo.BasicResponseVO;
 import com.kristoff.employees.service.IEmployeesService;
 import com.kristoff.employees.vo.EmployeeVO;
 import io.swagger.annotations.ApiOperation;
-import org.apache.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresUser;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.MediaType;
@@ -21,11 +23,12 @@ import java.util.Locale;
 //@CrossOrigin
 public class EmployeesController {
 
-    private static final Logger LOGGER = Logger.getLogger(EmployeesController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeesController.class);
 
     @Autowired
     private IEmployeesService employeesService;
 
+    //@RequiresRoles("admin")
     @RequiresPermissions("emp:findEmployeeList")
     @ApiOperation(value = "查询员工列表", notes = "查询员工列表")
     @RequestMapping(path = "/findEmployeeList",
@@ -37,7 +40,6 @@ public class EmployeesController {
                                             @RequestParam(name = "currentPage", defaultValue = "1") Integer currentPage) {
 
         Locale locale = LocaleContextHolder.getLocale();
-
         LOGGER.info("locale is " + locale);
 
         try {

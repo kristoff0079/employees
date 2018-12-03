@@ -1,9 +1,9 @@
 package com.kristoff.employees.config;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -15,7 +15,7 @@ import org.springframework.web.filter.CorsFilter;
 //@Configuration
 public class CorsConfig {
 
-    private static final Logger LOGGER = Logger.getLogger(CorsConfig.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CorsConfig.class);
 
     @Bean
     public FilterRegistrationBean filterRegistrationBean() {

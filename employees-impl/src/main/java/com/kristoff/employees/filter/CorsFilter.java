@@ -1,17 +1,16 @@
 package com.kristoff.employees.filter;
 
-import com.kristoff.employees.config.CorsConfig;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class CorsFilter implements Filter {
 
-    private static final Logger LOGGER = Logger.getLogger(CorsFilter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CorsFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

@@ -1,7 +1,8 @@
 package com.kristoff.common.filter;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.i18n.LocaleContextHolder;
 
 import javax.servlet.*;
@@ -11,7 +12,7 @@ import java.util.Locale;
 
 public class LangFilter implements Filter {
 
-    private static final Logger LOGGER = Logger.getLogger(LangFilter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LangFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

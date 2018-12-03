@@ -1,9 +1,11 @@
 package com.kristoff.employees.web;
 
 import com.kristoff.common.vo.BasicResponseVO;
-import org.apache.log4j.Logger;
+
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -15,7 +17,7 @@ import java.util.UUID;
 @ResponseBody
 public class GlobalExceptionHandler {
 
-    private static final Logger LOGGER = Logger.getLogger(GlobalExceptionHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(value = Exception.class)
     public BasicResponseVO exceptionHandler(HttpServletRequest request, Exception e) {

@@ -1,6 +1,8 @@
 package com.kristoff.employees.filter;
 
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -11,7 +13,7 @@ import java.util.Arrays;
 @Component
 public class CustomCorsFilter extends CorsFilter {
 
-    private static final Logger LOGGER = Logger.getLogger(CorsFilter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CorsFilter.class);
 
     public CustomCorsFilter() {
         super(configurationSource());
